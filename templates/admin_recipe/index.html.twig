@@ -1,0 +1,37 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Gérer les recettes{% endblock %}
+
+{% block main %}
+<h1>Gérer les recettes</h1>
+<a href=" {{path('app_admin_recipe_add')}}">Ajouter une recette</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Nom de la recette</th>
+            <th>Auteur</th>
+            <th>Durée</th>
+            <th>Difficulté</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for recipe in recipes %}
+        <tr>
+            <td>{{ recipe.id }}</td>
+            <td>{{ recipe.title }}</td>
+            <td>{{ recipe.author.username }}</td>
+            <td>{{ recipe.duration }}</td>
+            <td>{{ recipe.difficulty.label }}</td>
+            <td>
+                <a href="{{ path('app_admin_recipe_show', {id: recipe.id}) }}">Voir</a>
+                <a href="{{ path('app_admin_recipe_edit', {id: recipe.id}) }}">Modifier</a>
+                <a href="{{ path('app_admin_recipe_remove', {id: recipe.id}) }}">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

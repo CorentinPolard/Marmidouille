@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les recettes{% endblock %}
+
+{% block main %}
+{% if recipes|length > 0 %}
+<h1>Ici, vous trouverez toutes les meilleures recettes {{difficulty.label}}s</h1>
+
+<section class="recipes">
+    {% for recipe in recipes %}
+    {% include 'components/card.html.twig' %}
+    {% endfor %}
+</section>
+{% elseif difficulty %}
+<h1>Aucune recette trouvée pour la difficulté {{difficulty.label}}.</h1>
+{% else %}
+<h1>Difficulté non trouvée.</h1>
+{% endif %}
+{% endblock %}

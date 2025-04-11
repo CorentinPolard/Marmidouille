@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Marmidouille{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+    {% block stylesheets %}
+    {% endblock %}
+
+    {% block javascripts %}
+    {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <a href="{{ path('app_home') }}">
+                    <li>Home</li>
+                </a>
+                <a href="{{ path('app_recipes') }}">
+                    <li>Recettes</li>
+                </a>
+                {% if app.user %}
+                <a href="{{ path('app_create_recipe') }}">
+                    <li>Poster une recette</li>
+                </a>
+                <a href="{{ path('app_logout') }}">
+                    <li>Se déconnecter</li>
+                </a>
+
+                {% if is_granted("ROLE_ADMIN") %}
+                <a href="{{ path('app_admin') }}">
+                    <li>Fonctions Admin</li>
+                </a>
+                {% endif %}
+                {% else %}
+                <a href="{{ path('app_register') }}">
+                    <li>S'enregistrer</li>
+                </a>
+                <a href="{{ path('app_login') }}">
+                    <li>Se connecter</li>
+                </a>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block main %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2025 Marmidouille. Tous droits réservés.</p>
+    </footer>
+</body>
+
+</html>

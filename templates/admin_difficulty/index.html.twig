@@ -1,0 +1,30 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Gérer les niveaux de difficultés{% endblock %}
+
+{% block main %}
+<h1>Gérer les niveaux de difficultés des recettes</h1>
+<a href=" {{path('app_admin_difficulty_add')}}">Ajouter un niveau de difficulté</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Niveau de difficulté</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for difficulty in difficulties %}
+        <tr>
+            <td>{{ difficulty.id }}</td>
+            <td>{{ difficulty.label }}</td>
+            <td>
+                <a href="{{ path('app_admin_difficulty_edit', {id: difficulty.id}) }}">Modifier</a>
+                <a href="{{ path('app_admin_difficulty_remove', {id: difficulty.id}) }}">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

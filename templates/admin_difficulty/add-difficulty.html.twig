@@ -1,0 +1,12 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Ajouter un niveau de difficultés{% endblock %}
+
+{% block main %}
+<h1>Ajouter un niveau de difficultés des recettes</h1>
+
+{{ form_start(form) }}
+{{ form_widget(form) }}
+<button type="submit">Ajouter</button>
+{{ form_end(form) }}
+{% endblock %}

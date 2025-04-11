@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les recettes{% endblock %}
+
+{% block main %}
+{% if recipes|length > 0 %}
+<h1>Ici, vous trouverez toutes les meilleures recettes de {{ recipes[0].author.username }}</h1>
+
+<section class="recipes">
+    {% for recipe in recipes %}
+    {% include 'components/card.html.twig' %}
+    {% endfor %}
+</section>
+{% else %}
+<h1>{{user.username}} n'a pas encore partagé de recette.</h1>
+{% endif %}
+{% endblock %}

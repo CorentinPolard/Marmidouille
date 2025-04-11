@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Marmidouille{% endblock %}</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+    {% block stylesheets %}
+    {% endblock %}
+    <link rel="stylesheet" href="{{ asset('styles/admin.css') }} ">
+
+    {% block javascripts %}
+    {# {% block importmap %}{{ importmap('map') }}{% endblock %} #}
+    {% endblock %}
+</head>
+<header>
+    <nav class="navbar">
+        <ul>
+            <a href="{{ path('app_home') }}">
+                <li>Home</li>
+            </a>
+            <a href="{{ path('app_admin_recipe') }}">
+                <li>Gérer les recettes</li>
+            </a>
+            <a href="{{ path('app_admin_difficulty') }}">
+                <li>Gérer les niveaux de difficultés</li>
+            </a>
+            <a href="{{ path('app_admin_ingredient') }}">
+                <li>Gérer les ingrédients</li>
+            </a>
+            <a href="#">
+                <li>Gérer les commentaires</li>
+            </a>
+        </ul>
+    </nav>
+</header>
+
+<body>
+    <main>
+        <a id="logout" href="{{ path('app_logout') }}">
+            Se déconnecter
+        </a>
+        {% block main %}{% endblock %}
+    </main>
+    <script src="{{ asset('admin.js') }}"></script>
+</body>
+
+</html>

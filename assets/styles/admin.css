@@ -1,0 +1,89 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+}
+
+.navbar {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navbar li {
+    padding: 16px 40px;
+    list-style-type: none;
+}
+
+.navbar a {
+    text-decoration: none;
+}
+
+.navbar li:hover {
+    background-color: rgb(237, 238, 230);
+}
+
+main {
+    background-color: rgb(237, 238, 230);
+    flex: 1;
+    padding: 0 50px;
+}
+
+#logout {
+    position: absolute;
+    top: 25px;
+    right: 100px;
+    padding: 5px 10px;
+    border: solid 1px black;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+#logout:hover {
+    background-color: white;
+}
+
+table {
+    margin-top: 20px;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 20px;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+/* Style formulaire de recette */
+form {
+    margin-top: 20px;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+}
+
+form input,
+form select {
+    border-radius: 6px;
+}
+
+[type="submit"] {
+    margin-top: 16px;
+}

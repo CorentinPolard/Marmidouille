@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les recettes{% endblock %}
+
+{% block main %}
+<h1>Ici, vous trouverez toutes les meilleures recettes du monde</h1>
+
+<section class="recipes">
+    {% for recipe in recipes %}
+    {% include 'components/card.html.twig' %}
+    {% endfor %}
+</section>
+{% endblock %}

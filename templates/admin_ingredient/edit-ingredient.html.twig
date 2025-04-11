@@ -1,0 +1,15 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Modifier un ingrédients{% endblock %}
+
+{% block main %}
+<h1>
+    Modifier un ingrédient
+</h1>
+
+{{ form_start(form) }}
+{{ form_row(form.label) }}
+<button type="submit">Modifier</button>
+{{ form_end(form) }}
+
+{% endblock %}

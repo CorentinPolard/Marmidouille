@@ -1,0 +1,43 @@
+{{ form_start(form) }}
+
+{{ form_row(form.title) }}
+{{ form_row(form.difficulty) }}
+{{ form_row(form.duration) }}
+{{ form_row(form.portion) }}
+{{ form_row(form.image) }}
+<ul class="ingredientQuantities"
+    data-index="{{ form.ingredientQuantities|length > 0 ? form.ingredientQuantities|last.vars.name + 1 : 0}}"
+    data-prototype="{{ form_widget(form.ingredientQuantities.vars.prototype)|e('html_attr') }}">
+
+    {% for ingredientQuantity in form.ingredientQuantities %}
+    <li>
+        {{ form_row(ingredientQuantity.ingredient) }}
+        {{ form_row(ingredientQuantity.quantity) }}
+        {{ form_row(ingredientQuantity.unit) }}
+        <button class="remove_item">Supprimer l'ingrédient</button>
+
+    </li>
+    {% endfor %}
+
+</ul>
+<button type="button" class="add_item_link" data-collection-holder-class="ingredientQuantities">Ajouter un
+    ingrédient</button>
+
+<ul class="steps" data-index="{{ form.steps|length > 0 ? form.steps|last.vars.name + 1 : 0}}"
+    data-prototype="{{ form_widget(form.steps.vars.prototype)|e('html_attr') }}">
+
+    {% for step in form.steps %}
+    <li>
+        {{ form_row(step.title) }}
+        {{ form_row(step.content) }}
+        <button class="remove_item">Supprimer l'étape</button>
+    </li>
+    {% endfor %}
+
+</ul>
+<button type="button" class="add_item_link" data-collection-holder-class="steps">Ajouter une étape</button>
+
+
+<button type="submit">Ajouter</button>
+
+{{ form_end(form) }}
