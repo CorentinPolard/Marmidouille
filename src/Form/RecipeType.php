@@ -26,10 +26,16 @@ class RecipeType extends AbstractType
             ->add('portion', IntegerType::class, [
                 'label' => 'Nombre de portions',
                 'required' => true,
+                'attr' => [
+                    'min' => 1,
+                ],
             ])
             ->add('duration', IntegerType::class, [
                 'label' => 'Durée de la recette (min)',
                 'required' => true,
+                'attr' => [
+                    'min' => 0,
+                ],
             ])
             ->add('image', TextType::class, [
                 'label' => 'Image',

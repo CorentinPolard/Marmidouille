@@ -1,21 +1,24 @@
 <section class="comment">
     <h2>Commentaires</h2>
 
-    <h3>Ajouter un commentaire</h3>
-    {{ form_start(form) }}
-    {{ form_row(form.content) }}
-    <button type="submit">Ajouter</button>
-    {{ form_end(form) }}
+    <div>
+        <h3>Ajouter un commentaire</h3>
+        {{ form_start(form) }}
+        {{ form_row(form.content) }}
+        <button type="submit">Ajouter</button>
+        {{ form_end(form) }}
+    </div>
 
     {% for comment in recipe.comments %}
-    <div>
+    <div class="comment-item">
         <p><strong>{{ comment.user.username }}</strong> a dit :</p>
         <p>{{ comment.content }}</p>
         <p><em>Posté le {{ comment.createdAt|date('d/m/Y H:i') }}</em></p>
         {% if app.user and app.user == comment.user %}
         {# <a href="{{ path('app_comment_edit', { id: comment.id }) }}">Modifier</a> #}
-        {# <a href="{{ path('app_comment_delete', { id: comment.id }) }}">Supprimer</a> #}
-        <a href="#">Supprimer</a>
+        <div class="comment-actions">
+            <a href="{{ path('app_comment_delete', { id: comment.id }) }}">Supprimer le commentaire</a>
+        </div>
         {% endif %}
     </div>
     {% endfor %}

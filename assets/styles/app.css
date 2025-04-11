@@ -22,6 +22,7 @@ footer {
 
 nav ul {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     list-style-type: none;
 }
@@ -41,9 +42,13 @@ nav a:hover {
 }
 
 main {
-    background-color: rgb(237, 238, 230);
-    padding: 20px 25px;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 20px 15px;
+    background-color: rgb(237, 238, 230);
 }
 
 /* Style page d'acceuil */
@@ -75,11 +80,51 @@ main {
 }
 
 /* Style des recettes */
+.action {
+    display: flex;
+    gap: 15px;
+}
+
+.recipe {
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
 .recipe-img {
     max-width: 600px;
     height: 300px;
     object-fit: contain;
+}
+
+.step ol {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 500px;
+    width: 100%
+}
+
+.comment-item {
+    padding: 6px;
+    border: solid 1px black;
+    border-radius: 12px;
+}
+
+a {
+    color: black;
+}
+
+.comment-actions {
+    text-align: right;
 }
 
 /* Style formulaire de recette */
@@ -101,6 +146,6 @@ form select {
     border-radius: 6px;
 }
 
-[type="submit"] {
+.submit {
     margin-top: 16px;
 }

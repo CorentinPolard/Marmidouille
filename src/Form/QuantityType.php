@@ -23,10 +23,13 @@ class QuantityType extends AbstractType
             ->add('quantity', TextType::class, [
                 'label' => 'Quantité',
                 'required' => true,
+                'attr' => [
+                    'min' => 0,
+                ],
             ])
             ->add('unit', TextType::class, [
                 'label' => 'Unité',
-                // 'required' => true,
+                'required' => false,
             ])
         ;
     }

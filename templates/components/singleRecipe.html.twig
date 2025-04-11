@@ -1,21 +1,40 @@
-<h1>{{ recipe.title }}</h1>
-<p>Difficulté : {{ recipe.difficulty.label }}, durée : {{ recipe.duration }} minutes.</p>
-<img class="recipe-img" src="{{ recipe.image }}" alt="{{ recipe.title }}">
-<h2>Ingrédients</h2>
-<ul>
-    {% for ingredient in recipe.ingredientQuantities %}
-    <li>{{ingredient.ingredient.label}}</li>
-    {% endfor %}
-</ul>
-<h2>Recette</h2>
-<ol>
-    {% for step in recipe.steps %}
-    <li>
-        <h3>{{step.title}}</h3>
-        <p>{{step.content}}</p>
-    </li>
-    {% endfor %}
-</ol>
-<p>Recette de <a href="{{ path('app_recipe_user', {user: recipe.author.id}) }}">{{ recipe.author.username }}</a>.</p>
+<section class="recipe">
+    {% if app.user and app.user == recipe.author %}
+    <div class="action">
+        <a href="{{ path('app_delete_recipe', { id: recipe.id }) }}">Supprimer la recette</a>
+        <a href="{{ path('app_edit_recipe', { id: recipe.id }) }}">Modifier la recette</a>
+    </div>
+    {% endif %}
+    <h1>{{ recipe.title }}</h1>
+    <p>Difficulté : {{ recipe.difficulty.label }}, durée : {{ recipe.duration }} minutes.</p>
+    <img class="recipe-img" src="{{ recipe.image }}" alt="{{ recipe.title }}">
+    <section class="ingredient">
+        <h2>Ingrédients</h2>
+        <ul>
+            {% for ingredient in recipe.ingredientQuantities %}
+            <li>
+                {{ingredient.quantity}}
+                {% if ingredient.unit != null %}
+                {{ingredient.unit}} de
+                {% endif %}
+                {{ingredient.ingredient.label}}
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+    <section class="step">
+        <h2>Recette</h2>
+        <ol>
+            {% for step in recipe.steps %}
+            <li>
+                <h3>{{step.title}}</h3>
+                <p>{{step.content}}</p>
+            </li>
+            {% endfor %}
+        </ol>
+    </section>
+    <p>Recette de <a href="{{ path('app_recipe_user', {user: recipe.author.id}) }}">{{ recipe.author.username }}</a>.
+    </p>
+</section>
 
 {% include "components/comment.html.twig" %}

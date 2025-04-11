@@ -11,22 +11,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/user')]
 final class UserController extends AbstractController
 {
-    // #[Route('/user', name: 'app_user')]
-    // public function index(): Response
-    // {
-    //     return $this->render('user/index.html.twig', [
-    //         'controller_name' => 'UserController',
-    //     ]);
-    // }
+    #[Route('', name: 'app_user')]
+    public function index(): Response
+    {
+        return $this->redirectToRoute('app_recipes');
+    }
 
-    // #[Route('/{user}', name: 'app_recipe_user')]
-    // public function showUserRecipe(RecipeRepository $recipeRepository, User $user): Response
-    // {
-    //     $recipes = $recipeRepository->findBy(['author' => $user]);
+    #[Route('/{user}', name: 'app_recipe_user')]
+    public function showUserRecipe(RecipeRepository $recipeRepository, User $user): Response
+    {
+        $recipes = $recipeRepository->findBy(['author' => $user]);
 
-    //     return $this->render('recipe/user-recipe.html.twig', [
-    //         'recipes' => $recipes,
-    //         'user' => $user,
-    //     ]);
-    // }
+        return $this->render('user/user-recipe.html.twig', [
+            'recipes' => $recipes,
+            'user' => $user,
+        ]);
+    }
 }

@@ -47,7 +47,7 @@ class IngredientQuantity
         return $this->unit;
     }
 
-    public function setUnit(string $unit): static
+    public function setUnit(?string $unit): static
     {
         $this->unit = $unit;
 

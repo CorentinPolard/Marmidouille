@@ -34,6 +34,12 @@ final class RecipeController extends AbstractController
         ]);
     }
 
+    #[Route('/show', name: 'app_show')]
+    public function showRedirect(): Response
+    {
+        return $this->redirectToRoute('app_recipes');
+    }
+
     #[Route('/show/{id}', name: 'app_recipe_show', requirements: ['id' => '\d+'])]
     public function showRecipe(#[MapEntity(id: 'id')] Recipe $recipe, EntityManagerInterface $entityManager, Request $request): Response
     {
@@ -55,29 +61,6 @@ final class RecipeController extends AbstractController
         return $this->render('recipe/singleRecipe.html.twig', [
             'recipe' => $recipe,
             'form' => $form->createView(),
-        ]);
-    }
-
-    #[Route('/user/{user}', name: 'app_recipe_user')]
-    public function showUserRecipe(RecipeRepository $recipeRepository, User $user): Response
-    {
-        $recipes = $recipeRepository->findBy(['author' => $user]);
-
-        return $this->render('recipe/user-recipe.html.twig', [
-            'recipes' => $recipes,
-            'user' => $user,
-        ]);
-    }
-
-    #[Route('/difficulty/{difficultyName}', name: 'app_recipe_difficulty')]
-    public function showDifficultyRecipe(DifficultyRepository $difficultyRepository, RecipeRepository $recipeRepository, string $difficultyName): Response
-    {
-        $difficulty = $difficultyRepository->findOneBy(['label' => $difficultyName]);
-        $recipes = $recipeRepository->findBy(['difficulty' => $difficulty]);
-
-        return $this->render('recipe/difficulty-recipe.html.twig', [
-            'recipes' => $recipes,
-            'difficulty' => $difficulty,
         ]);
     }
 
@@ -107,5 +90,51 @@ final class RecipeController extends AbstractController
         return $this->render('recipe/create-recipe.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/edit', name: 'app_edit')]
+    public function editRedirect(): Response
+    {
+        return $this->redirectToRoute('app_recipes');
+    }
+
+    #[Route('/edit/{id}', name: 'app_edit_recipe')]
+    public function editRecipe(EntityManagerInterface $entityManager, Recipe $recipe, Request $request): Response
+    {
+        if ($this->getUser() == $recipe->getAuthor()) {
+            $form = $this->createForm(RecipeType::class, $recipe);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->persist($recipe);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_recipe_show', ['id' => $recipe->getId()]);
+            }
+
+            return $this->render('recipe/edit-recipe.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        }
+
+        return $this->redirectToRoute('app_logout');
+    }
+
+    #[Route('/delete', name: 'app_delete')]
+    public function deleteRedirect(): Response
+    {
+        return $this->redirectToRoute('app_recipes');
+    }
+
+    #[Route('/delete/{id}', name: 'app_delete_recipe')]
+    public function deleteRecipe(EntityManagerInterface $entityManager, Recipe $recipe): Response
+    {
+        if ($this->getUser() == $recipe->getAuthor()) {
+            $entityManager->remove($recipe);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_recipes');
+        }
+
+        return $this->redirectToRoute('app_logout');
     }
 }
